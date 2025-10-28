@@ -1,0 +1,19 @@
+#!/bin/sh
+echo "🔍 Проверка кода перед коммитом..."
+
+# Проверяем только изменённые файлы
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|jsx|ts|tsx)$')
+
+if [ "$STAGED_FILES" = "" ]; then
+  echo "✅ Нет файлов для проверки"
+  exit 0
+fi
+
+# Линтим файлы
+npx eslint --fix $STAGED_FILES
+npx prettier --write $STAGED_FILES
+
+# Добавляем исправленные файлы обратно
+echo "$STAGED_FILES" | xargs git add
+
+echo "✨ Проверка завершена успешно!"
