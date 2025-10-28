@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { PanelRightOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
@@ -34,7 +35,7 @@ export default function Sidebar() {
 					return (
 						<motion.li
 							variants={textNavVariants}
-							className='flex items-center gap-1.5 text-xl'
+							className={clsx('flex items-center gap-1.5 px-2 py-1.5 text-xl hover:text-foreground/50')}
 							key={item.id}
 						>
 							<Icon size={28} />
