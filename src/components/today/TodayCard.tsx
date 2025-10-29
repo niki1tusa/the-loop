@@ -30,7 +30,7 @@ export default function TodayCard() {
 					const Icon = item.icon;
 					const bool = isComplete.has(item.id);
 					return (
-						<li className='flex items-center justify-between' key={item.id}>
+						<li className='flex items-center justify-between 2xl:text-xl' key={item.id}>
 							<span className='flex items-center gap-2'>
 								<Icon size={22} />
 								{item.title}
