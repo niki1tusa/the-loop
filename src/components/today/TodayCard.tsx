@@ -45,7 +45,7 @@ export default function TodayCard() {
 								</div>
 								<div className='flex flex-col'>
 									<span>{item.title}</span>
-									<span className='text-sm'>
+									<span className='text-sm text-muted'>
 										{item.complete_quantity}/{item.quantity} {item.quantity_description}
 									</span>
 								</div>
