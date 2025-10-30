@@ -35,7 +35,10 @@ export default function Sidebar() {
 					return (
 						<motion.li
 							variants={textNavVariants}
-							className={clsx('flex items-center gap-1.5 px-2 py-1.5 text-xl hover:text-foreground/50')}
+							className={clsx(
+								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-xl',
+								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
+							)}
 							key={item.id}
 						>
 							<Icon size={28} />

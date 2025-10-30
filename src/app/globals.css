@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
-
+/* rounded-3xl; shadow shadow-neutral-400 */
 @theme {
 	--breakpoint-*: initial;
 }

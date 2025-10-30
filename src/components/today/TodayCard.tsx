@@ -1,6 +1,7 @@
 'use client';
 
 import { Square, SquareCheck } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useState } from 'react';
 
 import Title from '../title/Title';
@@ -21,24 +22,31 @@ export default function TodayCard() {
 		});
 	};
 	return (
-		<div className='bg-card w-[300px] rounded shadow shadow-neutral-400'>
-			<div className='px-3 text-3xl'>
-				<Title textSize='lg'>Today</Title>
-			</div>
-			<ul className='flex flex-col gap-2 px-3 py-2'>
+		<div className='flex w-[300px] flex-col gap-3'>
+			<Title textSize='lg'>Today</Title>
+
+			<ul className='flex flex-col gap-2.5'>
 				{MY_HABIT_MOCK.map(item => {
 					const Icon = item.icon;
 					const bool = isComplete.has(item.id);
 					return (
-						<li className='flex items-center justify-between 2xl:text-xl' key={item.id}>
+						<motion.li
+							whileHover={{
+								y: -3,
+								scale: 1.02,
+								transition: { type: 'spring', stiffness: 200, damping: 15 },
+							}}
+							className='bg-card flex items-center justify-between rounded-3xl px-3 py-3 font-medium shadow shadow-neutral-400 hover:shadow-lg 2xl:text-xl'
+							key={item.id}
+						>
 							<span className='flex items-center gap-2'>
-								<Icon size={22} />
+								<Icon size={22} className='text-primary' />
 								{item.title}
 							</span>
 							<button onClick={() => handleComplete(item.id)}>
 								{bool ? <SquareCheck size={22} /> : <Square size={22} />}
 							</button>
-						</li>
+						</motion.li>
 					);
 				})}
 			</ul>
