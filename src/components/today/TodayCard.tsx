@@ -39,12 +39,19 @@ export default function TodayCard() {
 							className='bg-card flex items-center justify-between rounded-3xl px-3 py-3 font-medium shadow shadow-neutral-400 hover:shadow-lg 2xl:text-xl'
 							key={item.id}
 						>
-							<span className='flex items-center gap-2'>
-								<Icon size={22} className='text-primary' />
-								{item.title}
-							</span>
+							<div className='flex items-center gap-2'>
+								<div className='rounded bg-sky-50 p-2 shadow shadow-neutral-400'>
+									<Icon size={28} className='text-primary' />
+								</div>
+								<div className='flex flex-col'>
+									<span>{item.title}</span>
+									<span className='text-sm'>
+										{item.complete_quantity}/{item.quantity} {item.quantity_description}
+									</span>
+								</div>
+							</div>
 							<button onClick={() => handleComplete(item.id)}>
-								{bool ? <SquareCheck size={22} /> : <Square size={22} />}
+								{bool ? <SquareCheck className='text-secondary' size={22} /> : <Square size={22} />}
 							</button>
 						</motion.li>
 					);

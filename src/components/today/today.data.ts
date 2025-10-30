@@ -1,10 +1,38 @@
-import { CigaretteOff, Dumbbell, GlassWater, SquareActivity } from 'lucide-react';
+import { Activity, CigaretteOff, Dumbbell, GlassWater } from 'lucide-react';
 
 import { TMyHabitItem } from './today.types';
 
 export const MY_HABIT_MOCK: TMyHabitItem[] = [
-	{ id: 1, title: 'Drink water', is_completed: false, icon: GlassWater },
-	{ id: 2, title: "Don't smok", is_completed: false, icon: CigaretteOff },
-	{ id: 3, title: 'Morning stretching', is_completed: false, icon: Dumbbell },
-	{ id: 4, title: '10.000 steps', is_completed: false, icon: SquareActivity },
+	{
+		id: 1,
+		title: 'Drink water',
+		icon: GlassWater,
+		quantity: 3,
+		complete_quantity: 1,
+		quantity_description: 'glass',
+	},
+	{
+		id: 2,
+		title: "Don't smok",
+		icon: CigaretteOff,
+		quantity: 1,
+		complete_quantity: 0,
+		quantity_description: null,
+	},
+	{
+		id: 3,
+		title: 'Morning stretching',
+		icon: Dumbbell,
+		quantity: 1,
+		complete_quantity: 1,
+		quantity_description: null,
+	},
+	{
+		id: 4,
+		title: 'Read a book',
+		icon: Activity,
+		quantity: 30,
+		complete_quantity: 15,
+		quantity_description: 'page',
+	},
 ];

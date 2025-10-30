@@ -17,7 +17,7 @@ export default function Calendar() {
 		},
 	];
 	return (
-		<div className='bg-card text-card-foreground h-[300px] rounded-3xl px-3 py-2 shadow shadow-neutral-400'>
+		<div className='bg-card text-card-foreground rounded-3xl px-3 py-2 shadow shadow-neutral-400'>
 			{/* weekly */}
 			<div className='flex gap-2'>
 				<ul className='flex flex-col'>
