@@ -1,6 +1,5 @@
-import TodayCard from '../../../components/today/TodayCard';
-
-import Calendar from '@/src/components/calendar/Calendar';
+import Calendar from '@/src/components/ui/calendar/Calendar';
+import TodayCard from '@/src/components/ui/today/TodayCard';
 
 export default function DashboardPage() {
 	return (

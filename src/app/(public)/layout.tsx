@@ -1,5 +1,5 @@
 import Sidebar from '@/src/components/sidebar/Sidebar';
-import Title from '@/src/components/title/Title';
+import Title from '@/src/components/ui/title/Title';
 
 export default function Publiclayout({ children }: { children: React.ReactNode }) {
 	return (
