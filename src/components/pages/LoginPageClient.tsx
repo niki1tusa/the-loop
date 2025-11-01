@@ -1,4 +1,5 @@
 import { login } from '../../app/(auth)/login/actions';
+import Button from '../ui/button/Button';
 
 export default function LoginPageClient() {
 	return (
@@ -8,8 +9,9 @@ export default function LoginPageClient() {
 
 			<label htmlFor='password'>Password:</label>
 			<input id='password' name='password' type='password' required />
-
-			<button formAction={login}>Log in</button>
+			<Button type='submit' onClick={login}>
+				Log in
+			</Button>
 		</form>
 	);
 }

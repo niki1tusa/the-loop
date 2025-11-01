@@ -15,9 +15,11 @@ export async function createServer() {
 				setAll(cookiesToSet) {
 					try {
 						cookiesToSet.forEach(({ name, value, options }) =>
-							cookieStore.set(name, value, options)
+							cookieStore.set(name, value, { ...options, maxAge: 60 * 60 * 24 * 14 })
 						);
-					} catch {}
+					} catch (e) {
+						console.error(e);
+					}
 				},
 			},
 		}
