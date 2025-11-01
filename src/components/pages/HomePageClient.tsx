@@ -4,6 +4,8 @@ import { Brain, Dumbbell, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
+import { PAGES } from '@/src/config/pages.config';
+
 export default function HomePageClient() {
 	return (
 		<main className='text-foreground bg-background flex min-h-screen flex-col items-center'>
@@ -17,7 +19,7 @@ export default function HomePageClient() {
 				</p>
 				<div className='flex gap-4'>
 					<Link
-						href={'/dashboard'}
+						href={PAGES.LOGIN}
 						className='bg-primary text-primary-foreground rounded-xl px-6 py-3 font-medium'
 					>
 						Get Started

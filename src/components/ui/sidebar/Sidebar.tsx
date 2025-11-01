@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { PanelRightOpen } from 'lucide-react';
+import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
@@ -25,18 +25,36 @@ export default function Sidebar() {
 			>
 				<PanelRightOpen />
 			</motion.button>
-			<motion.div variants={textNavVariants} className='text-4xl'>
+			<motion.div variants={textNavVariants} className='border-muted border-b-2 pb-5 text-4xl'>
 				Hello, <br />
 				<b>Nikita</b>
 			</motion.div>
-			<ul className='flex flex-col gap-4'>
+			<ul className='border-muted flex flex-col gap-4 border-b-2 pb-5'>
 				{NAV_DATA.map(item => {
 					const Icon = item.icon;
 					return (
 						<motion.li
 							variants={textNavVariants}
 							className={clsx(
-								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-xl',
+								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-lg',
+								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
+							)}
+							key={item.id}
+						>
+							<Icon size={28} />
+							{item.title}
+						</motion.li>
+					);
+				})}
+			</ul>
+			<ul className=' flex flex-col gap-4 '>
+				{[{id: 1, title: 'Light', icon: Sun}, {id: 2, title: 'Dark', icon: Moon}].map(item => {
+					const Icon = item.icon;
+					return (
+						<motion.li
+							variants={textNavVariants}
+							className={clsx(
+								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-lg',
 								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
 							)}
 							key={item.id}
