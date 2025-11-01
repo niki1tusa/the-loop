@@ -1,0 +1,12 @@
+#!/bin/sh
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE" | tr -d '\r')
+
+echo "🧠 Проверка сообщения коммита..."
+if ! echo "$COMMIT_MSG" | grep -Eq "^(feat|fix|chore|docs|style|refactor|test): "; then
+  echo "❌ Сообщение коммита должно начинаться с одного из:"
+  echo "feat:, fix:, chore:, docs:, style:, refactor:, test:"
+  exit 1
+fi
+
+echo "✅ Формат сообщения корректен!"
