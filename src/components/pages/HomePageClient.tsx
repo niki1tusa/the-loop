@@ -4,6 +4,8 @@ import { Brain, Dumbbell, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
+import Button from '../ui/button/Button';
+
 import { PAGES } from '@/src/config/pages.config';
 
 export default function HomePageClient() {
@@ -18,11 +20,8 @@ export default function HomePageClient() {
 					Track your progress, stay consistent, and grow stronger every day.
 				</p>
 				<div className='flex gap-4'>
-					<Link
-						href={PAGES.LOGIN}
-						className='bg-primary text-primary-foreground rounded-xl px-6 py-3 font-medium'
-					>
-						Get Started
+					<Link href={PAGES.LOGIN}>
+						<Button>Get Started</Button>
 					</Link>
 					<button className='border-secondary text-secondary rounded-xl border px-6 py-3 font-medium'>
 						See Demo
@@ -56,9 +55,7 @@ export default function HomePageClient() {
 			{/* CTA */}
 			<section className='py-16 text-center'>
 				<h2 className='mb-4 text-3xl font-semibold'>Start your journey today — it’s free.</h2>
-				<button className='bg-primary text-primary-foreground rounded-xl px-6 py-3 font-medium'>
-					Get Started
-				</button>
+				<Button>Get started</Button>
 			</section>
 
 			{/* FOOTER */}
