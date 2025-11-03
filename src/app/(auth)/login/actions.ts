@@ -24,5 +24,5 @@ export async function login(formData: FormData) {
 	}
 
 	revalidatePath(PAGES.DASHBOARD);
-	redirect('/');
+	redirect(PAGES.DASHBOARD);
 }
