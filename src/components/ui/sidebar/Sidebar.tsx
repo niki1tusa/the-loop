@@ -7,8 +7,10 @@ import { useState } from 'react';
 
 import { navVariants, textNavVariants } from './animate';
 import { NAV_DATA } from './sidebar.data';
+import { useProfile } from '@/src/hooks/useProfile';
 
 export default function Sidebar() {
+	const { profile } = useProfile();
 	const [isShow, setIsShow] = useState<boolean>(true);
 	return (
 		<motion.nav
@@ -25,11 +27,16 @@ export default function Sidebar() {
 			>
 				<PanelRightOpen />
 			</motion.button>
-			<motion.div variants={textNavVariants} className='border-muted border-b-2 pb-5 text-4xl'>
+			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
-				<b>Nikita</b>
+				<b>{profile.name}</b>
+				<motion.div
+					animate={{ scaleX: isShow ? 1 : 0 }}
+					transition={{ duration: 0.8, ease: 'easeInOut' }}
+					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+				/>
 			</motion.div>
-			<ul className='border-muted flex flex-col gap-4 border-b-2 pb-5'>
+			<ul className='relative flex flex-col gap-4'>
 				{NAV_DATA.map(item => {
 					const Icon = item.icon;
 					return (
@@ -46,9 +53,17 @@ export default function Sidebar() {
 						</motion.li>
 					);
 				})}
+				<motion.div
+					animate={{ scaleX: isShow ? 1 : 0 }}
+					transition={{ duration: 0.8, ease: 'easeInOut' }}
+					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+				/>
 			</ul>
-			<ul className=' flex flex-col gap-4 '>
-				{[{id: 1, title: 'Light', icon: Sun}, {id: 2, title: 'Dark', icon: Moon}].map(item => {
+			<ul className='flex flex-col gap-4'>
+				{[
+					{ id: 1, title: 'Light', icon: Sun },
+					{ id: 2, title: 'Dark', icon: Moon },
+				].map(item => {
 					const Icon = item.icon;
 					return (
 						<motion.li
