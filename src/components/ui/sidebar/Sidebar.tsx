@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { navVariants, textNavVariants } from './animate';
 import { NAV_DATA } from './sidebar.data';
-import { useGetProfileQuery } from '@/src/services/api';
+import { useGetProfileQuery } from '@/src/services/profile/profile.api';
 
 export default function Sidebar() {
 	const { data: profile } = useGetProfileQuery();
@@ -29,7 +29,7 @@ export default function Sidebar() {
 			</motion.button>
 			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
-				<b>{profile?.name ?? 'Guest'}</b>
+				<b>{profile?.name}</b>
 				<motion.div
 					animate={{ scaleX: isShow ? 1 : 0 }}
 					transition={{ duration: 0.8, ease: 'easeInOut' }}

@@ -2,6 +2,7 @@
 
 import { Brain, Dumbbell, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Button from '../ui/button/Button';
@@ -11,6 +12,14 @@ import { PAGES } from '@/src/config/pages.config';
 export default function HomePageClient() {
 	return (
 		<main className='text-foreground bg-background flex min-h-screen flex-col items-center'>
+			<div className='flex w-[50%] items-center justify-between'>
+				<Image src='/logo.png' alt='logo' width={100} height={100} />
+				<div>
+					<Link href={PAGES.LOGIN}>
+						<Button>Sign In</Button>
+					</Link>
+				</div>
+			</div>
 			{/* HERO */}
 			<section className='flex max-w-2xl flex-col items-center py-24 text-center'>
 				<h1 className='mb-4 text-5xl font-bold'>

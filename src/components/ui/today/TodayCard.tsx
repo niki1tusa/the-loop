@@ -4,13 +4,15 @@ import { Square, SquareCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
+import Button from '../button/Button';
 import Title from '../title/Title';
 
 import { MY_HABIT_MOCK } from './today.data';
+import { useGetHabitsQuery } from '@/src/services/habit/habit.api';
 
 export default function TodayCard() {
-	const [isComplete, setIsComplete] = useState<Set<number>>(new Set());
-	const handleComplete = (id: number) => {
+	const [isComplete, setIsComplete] = useState<Set<string>>(new Set());
+	const handleComplete = (id: string) => {
 		setIsComplete(prev => {
 			const newSet = new Set(prev);
 			if (newSet.has(id)) {
@@ -21,13 +23,14 @@ export default function TodayCard() {
 			return newSet;
 		});
 	};
+	const { data: habits } = useGetHabitsQuery();
 	return (
 		<div className='flex w-[300px] flex-col gap-3'>
 			<Title textSize='lg'>Today</Title>
 
 			<ul className='flex flex-col gap-2.5'>
-				{MY_HABIT_MOCK.map(item => {
-					const Icon = item.icon;
+				{habits?.map(item => {
+					// const Icon = item.icon;
 					const bool = isComplete.has(item.id);
 					return (
 						<motion.li
@@ -41,11 +44,11 @@ export default function TodayCard() {
 						>
 							<div className='flex items-center gap-2'>
 								<div className='rounded bg-sky-50 p-2 shadow shadow-neutral-400'>
-									<Icon size={28} className='text-primary' />
+									{/* <Icon size={28} className='text-primary' /> */}
 								</div>
 								<div className='flex flex-col'>
 									<span>{item.title}</span>
-									<span className='text-sm text-muted'>
+									<span className='text-muted text-sm'>
 										{item.complete_quantity}/{item.quantity} {item.quantity_description}
 									</span>
 								</div>
@@ -57,6 +60,7 @@ export default function TodayCard() {
 					);
 				})}
 			</ul>
+			<Button>Add habit</Button>
 		</div>
 	);
 }
