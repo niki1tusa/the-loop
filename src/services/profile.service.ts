@@ -1,7 +1,7 @@
-import { createServer } from '../utils/supabase/server';
+import { createClient } from '../utils/supabase/client';
 
 export async function getProfileById() {
-	const supabase = await createServer();
+	const supabase = createClient();
 	const {
 		data: { user },
 		error,

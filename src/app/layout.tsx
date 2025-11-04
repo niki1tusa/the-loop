@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Rubik } from 'next/font/google';
 
-import Provider from '../providers/Provider';
+import RootProvider from '../providers/Provider';
 
 import './globals.css';
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${interSans.variable} ${rubikSans.variable} antialiased`}>
-				<Provider>{children}</Provider>
+				<RootProvider>{children}</RootProvider>
 			</body>
 		</html>
 	);

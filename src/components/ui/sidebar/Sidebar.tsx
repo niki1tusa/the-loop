@@ -7,10 +7,10 @@ import { useState } from 'react';
 
 import { navVariants, textNavVariants } from './animate';
 import { NAV_DATA } from './sidebar.data';
-import { useProfile } from '@/src/hooks/useProfile';
+import { useGetProfileQuery } from '@/src/services/api';
 
 export default function Sidebar() {
-	const { profile } = useProfile();
+	const { data: profile } = useGetProfileQuery();
 	const [isShow, setIsShow] = useState<boolean>(true);
 	return (
 		<motion.nav
@@ -29,7 +29,7 @@ export default function Sidebar() {
 			</motion.button>
 			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
-				<b>{profile.name}</b>
+				<b>{profile?.name ?? 'Guest'}</b>
 				<motion.div
 					animate={{ scaleX: isShow ? 1 : 0 }}
 					transition={{ duration: 0.8, ease: 'easeInOut' }}
