@@ -3,12 +3,13 @@
 import { Square, SquareCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Button from '../button/Button';
 import Title from '../title/Title';
 
-import { MY_HABIT_MOCK } from './today.data';
 import { useGetHabitsQuery } from '@/src/services/habit/habit.api';
+import { open } from '@/src/store/modal.slice';
 
 export default function TodayCard() {
 	const [isComplete, setIsComplete] = useState<Set<string>>(new Set());
@@ -24,6 +25,8 @@ export default function TodayCard() {
 		});
 	};
 	const { data: habits } = useGetHabitsQuery();
+	const dispatch = useDispatch();
+
 	return (
 		<div className='flex w-[300px] flex-col gap-3'>
 			<Title textSize='lg'>Today</Title>
@@ -60,7 +63,7 @@ export default function TodayCard() {
 					);
 				})}
 			</ul>
-			<Button>Add habit</Button>
+			<Button onClick={() => dispatch(open({ type: 'createHabit' }))}>Add habit</Button>
 		</div>
 	);
 }
