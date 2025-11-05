@@ -5,10 +5,12 @@ import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
-import { navVariants, textNavVariants } from './animate';
+import { borderVariants, navVariants, textNavVariants } from './animate';
 import { NAV_DATA } from './sidebar.data';
+import { useGetProfileQuery } from '@/src/services/profile/profile.api';
 
 export default function Sidebar() {
+	const { data: profile } = useGetProfileQuery();
 	const [isShow, setIsShow] = useState<boolean>(true);
 	return (
 		<motion.nav
@@ -19,36 +21,50 @@ export default function Sidebar() {
 		>
 			<motion.button
 				animate={{ rotate: isShow ? 0 : 180 }}
+				whileTap={{ scale: 0.9 }}
+				whileHover={{ scale: 1.02 }}
+				transition={{ type: 'spring', stiffness: 250, damping: 20 }}
 				type='button'
 				onClick={() => setIsShow(!isShow)}
 				className='absolute top-8 right-2 z-20'
 			>
 				<PanelRightOpen />
 			</motion.button>
-			<motion.div variants={textNavVariants} className='border-muted border-b-2 pb-5 text-4xl'>
+			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
-				<b>Nikita</b>
+				<b>{profile?.name}</b>
+				<motion.div
+					variants={borderVariants}
+					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+				/>
 			</motion.div>
-			<ul className='border-muted flex flex-col gap-4 border-b-2 pb-5'>
+			<ul className='relative flex flex-col gap-4'>
 				{NAV_DATA.map(item => {
 					const Icon = item.icon;
 					return (
 						<motion.li
 							variants={textNavVariants}
 							className={clsx(
-								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-lg',
+								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
 								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
 							)}
 							key={item.id}
 						>
-							<Icon size={28} />
+							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
 							{item.title}
 						</motion.li>
 					);
 				})}
+				<motion.div
+					variants={borderVariants}
+					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+				/>
 			</ul>
-			<ul className=' flex flex-col gap-4 '>
-				{[{id: 1, title: 'Light', icon: Sun}, {id: 2, title: 'Dark', icon: Moon}].map(item => {
+			<ul className='flex flex-col gap-4'>
+				{[
+					{ id: 1, title: 'Light', icon: Sun },
+					{ id: 2, title: 'Dark', icon: Moon },
+				].map(item => {
 					const Icon = item.icon;
 					return (
 						<motion.li

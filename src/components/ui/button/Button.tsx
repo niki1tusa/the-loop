@@ -1,13 +1,21 @@
+'use client';
+
+import { motion } from 'motion/react';
+
 import { TButtonProps } from './button.types';
 
-export default function Button({ children, type = 'button', onClick }: TButtonProps) {
+export default function Button({ children, type = 'button', onClick, action }: TButtonProps) {
 	return (
-		<button
+		<motion.button
+			whileHover={{ scale: 1.03 }}
+			whileTap={{ scale: 0.9 }}
+			transition={{ type: 'spring', stiffness: 200, damping: 10 }}
 			type={type}
-			className='bg-primary text-primary-foreground px-3 py-2 shadow shadow-neutral-400'
+			className='bg-primary text-primary-foreground rounded px-4 py-2 font-medium shadow shadow-neutral-400'
 			onClick={onClick}
+			formAction={action}
 		>
 			{children}
-		</button>
+		</motion.button>
 	);
 }

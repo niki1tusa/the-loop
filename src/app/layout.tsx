@@ -1,34 +1,39 @@
-import type { Metadata } from "next";
-import { Rubik, Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, Rubik } from 'next/font/google';
+
+import RootProvider from '../providers/Provider';
+
+import './globals.css';
 
 const interSans = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+	variable: '--font-inter',
+	subsets: ['latin'],
 });
 
 const rubikSans = Rubik({
-  variable: "--font-rubik",
-  subsets: ["latin"],
+	variable: '--font-rubik',
+	subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "The Loop",
-  description: "app for tracker habit",
+	title: 'The Loop',
+	description: 'app for tracker habit',
+	icons: {
+		icon: '/favicon/favicon.svg',
+		shortcut: '/favicon/favicon.svg',
+	},
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${interSans.variable} ${rubikSans.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang='en'>
+			<body className={`${interSans.variable} ${rubikSans.variable} antialiased`}>
+				<RootProvider>{children}</RootProvider>
+			</body>
+		</html>
+	);
 }
