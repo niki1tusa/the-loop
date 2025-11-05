@@ -1,16 +1,22 @@
+import { FieldValues } from 'react-hook-form';
+
 import { TInputProps } from './input.types';
 
-export default function Input({
+export default function Input<T extends FieldValues>({
 	placeholder = 'Enter text...',
 	type = 'text',
 	name,
 	required,
 	label,
-}: TInputProps) {
+	register,
+	errors,
+}: TInputProps<T>) {
+	const error = errors[name];
 	return (
 		<div className='flex flex-col gap-1'>
 			{label && <label htmlFor={name}>{label}</label>}
 			<input
+				{...register(name)}
 				id={name}
 				name={name}
 				type={type}
@@ -20,6 +26,11 @@ export default function Input({
 				autoComplete='new-password'
 				data-lpignore='true'
 			/>
+			{error?.message && (
+				<p className='rounded border border-red-900 bg-red-500 p-2 text-center text-sm text-red-900'>
+					{error.message as string}
+				</p>
+			)}
 		</div>
 	);
 }

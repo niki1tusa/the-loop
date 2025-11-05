@@ -5,7 +5,7 @@ import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
-import { navVariants, textNavVariants } from './animate';
+import { borderVariants, navVariants, textNavVariants } from './animate';
 import { NAV_DATA } from './sidebar.data';
 import { useGetProfileQuery } from '@/src/services/profile/profile.api';
 
@@ -21,6 +21,9 @@ export default function Sidebar() {
 		>
 			<motion.button
 				animate={{ rotate: isShow ? 0 : 180 }}
+				whileTap={{ scale: 0.9 }}
+				whileHover={{ scale: 1.02 }}
+				transition={{ type: 'spring', stiffness: 250, damping: 20 }}
 				type='button'
 				onClick={() => setIsShow(!isShow)}
 				className='absolute top-8 right-2 z-20'
@@ -31,8 +34,7 @@ export default function Sidebar() {
 				Hello, <br />
 				<b>{profile?.name}</b>
 				<motion.div
-					animate={{ scaleX: isShow ? 1 : 0 }}
-					transition={{ duration: 0.8, ease: 'easeInOut' }}
+					variants={borderVariants}
 					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
 				/>
 			</motion.div>
@@ -54,8 +56,7 @@ export default function Sidebar() {
 					);
 				})}
 				<motion.div
-					animate={{ scaleX: isShow ? 1 : 0 }}
-					transition={{ duration: 0.8, ease: 'easeInOut' }}
+					variants={borderVariants}
 					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
 				/>
 			</ul>

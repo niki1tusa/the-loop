@@ -22,7 +22,7 @@ export async function getProfileHabits() {
 	return habits ?? [];
 }
 // create
-export async function createHabit(fields: THabitInsert) {
+export async function createHabit(fields: Omit<THabitInsert, 'profile_id'>) {
 	const supabase = createClient();
 	const {
 		data: { user },

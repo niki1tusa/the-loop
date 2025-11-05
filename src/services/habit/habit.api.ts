@@ -19,7 +19,7 @@ export const habitsApi = api.injectEndpoints({
 			},
 			providesTags: ['Habits'],
 		}),
-		createHabit: builder.mutation<THabit, THabitInsert>({
+		createHabit: builder.mutation<THabit, Omit<THabitInsert, 'profile_id'>>({
 			async queryFn(fields) {
 				try {
 					const data = await createHabit(fields);
