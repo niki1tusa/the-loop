@@ -14,7 +14,7 @@ export type Database = {
 					created_at: string | null;
 					id: string;
 					profile_id: string;
-					quantity: number | null;
+					quantity: string | null;
 					quantity_description: string | null;
 					title: string;
 					updated_at: string | null;
@@ -24,7 +24,7 @@ export type Database = {
 					created_at?: string | null;
 					id?: string;
 					profile_id: string;
-					quantity?: number | null;
+					quantity?: string | null;
 					quantity_description?: string | null;
 					title: string;
 					updated_at?: string | null;
@@ -34,7 +34,7 @@ export type Database = {
 					created_at?: string | null;
 					id?: string;
 					profile_id?: string;
-					quantity?: number | null;
+					quantity?: string | null;
 					quantity_description?: string | null;
 					title?: string;
 					updated_at?: string | null;

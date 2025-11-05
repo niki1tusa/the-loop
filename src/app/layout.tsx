@@ -18,6 +18,10 @@ const rubikSans = Rubik({
 export const metadata: Metadata = {
 	title: 'The Loop',
 	description: 'app for tracker habit',
+	icons: {
+		icon: '/favicon/favicon.svg',
+		shortcut: '/favicon/favicon.svg',
+	},
 };
 
 export default function RootLayout({

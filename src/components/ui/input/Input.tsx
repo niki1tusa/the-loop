@@ -21,7 +21,7 @@ export default function Input<T extends FieldValues>({
 				name={name}
 				type={type}
 				placeholder={placeholder}
-				className='ring-primary placeholder:text-muted text-foreground bg-card rounded px-2 py-2 shadow shadow-neutral-400 ring-offset-0 transition-all outline-none hover:bg-gray-50 focus:shadow-lg focus:ring-2'
+				className='ring-primary placeholder:text-muted text-foreground bg-card w-full rounded px-2 py-2 shadow shadow-neutral-400 ring-offset-0 transition-all outline-none hover:bg-gray-50 focus:shadow-lg focus:ring-2'
 				required={required}
 				autoComplete='new-password'
 				data-lpignore='true'

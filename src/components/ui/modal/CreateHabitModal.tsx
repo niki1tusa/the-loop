@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import z from 'zod';
+import { z } from 'zod';
 
 import Button from '../button/Button';
 import Input from '../input/Input';
@@ -15,8 +15,12 @@ type Props = {
 };
 const zodSchemeCreateHabit = z.object({
 	title: z.string().min(1, 'Title is required!'),
-	quantity: z.coerce.number().min(1, 'Quantity is required!'),
-	quantityDescription: z.string().min(1, 'Description is required!'),
+	quantity: z
+		.string()
+		.trim()
+		.regex(/^\d+(?:[.,]\d+)?$/, 'Enter number!')
+		.min(1, 'Quantity is required!'),
+	quantity_description: z.string().min(1, 'Description is required!'),
 });
 type TFormData = z.infer<typeof zodSchemeCreateHabit>;
 export const CreateHabitModal = ({ close }: Props) => {
@@ -37,8 +41,8 @@ export const CreateHabitModal = ({ close }: Props) => {
 		}
 	});
 	return (
-		<Modal title='Create Habit' close={close}>
-			<form onSubmit={onSubmit} className='flex flex-col items-center justify-center gap-3'>
+		<Modal title='Create habit' close={close}>
+			<form onSubmit={onSubmit} className='flex w-full flex-col justify-center gap-3'>
 				<Input<TFormData>
 					register={register}
 					errors={errors}
@@ -51,7 +55,7 @@ export const CreateHabitModal = ({ close }: Props) => {
 				<Input<TFormData>
 					register={register}
 					errors={errors}
-					type='number'
+					type='text'
 					name='quantity'
 					label='Quantity:'
 					placeholder='Enter Quantity...'
@@ -61,12 +65,12 @@ export const CreateHabitModal = ({ close }: Props) => {
 					register={register}
 					errors={errors}
 					type='text'
-					name='quantityDescription'
+					name='quantity_description'
 					label='Description:'
 					placeholder='liters, pages, minutes'
 					required
 				/>
-				<div className='flex gap-1'>
+				<div className='flex gap-1.5'>
 					<Button type='submit'>Create</Button>
 					<Button onClick={close}>Close</Button>
 				</div>
