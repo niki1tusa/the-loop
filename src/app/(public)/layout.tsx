@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import Sidebar from '@/src/components/ui/sidebar/Sidebar';
 import Title from '@/src/components/ui/title/Title';
-import { PAGES } from '@/src/config/pages.config';
+import { PAGES } from '@/src/config/pages-config';
 import { getServerAuth } from '@/src/utils/supabase/getServerAuth';
 
 export default async function Publiclayout({ children }: { children: React.ReactNode }) {

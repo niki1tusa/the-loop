@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import Button from '../ui/button/Button';
 
-import { PAGES } from '@/src/config/pages.config';
+import { PAGES } from '@/src/config/pages-config';
 
 export default function HomePageClient() {
 	return (

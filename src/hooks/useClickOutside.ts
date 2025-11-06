@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type TEvent = MouseEvent | TouchEvent;
 type THandlerEvent = (event: TEvent) => void;
+
 export function useClickOutside<T extends HTMLElement>(handler: THandlerEvent) {
 	const ref = useRef<T | null>(null);
 

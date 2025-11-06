@@ -2,7 +2,7 @@
 
 import { Square } from 'lucide-react';
 
-import { useGetHabitsQuery } from '@/src/services/habit/habit.api';
+import { useGetHabitsQuery } from '@/src/services/habit/habit-api';
 
 export default function Calendar() {
 	const week = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
