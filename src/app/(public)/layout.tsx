@@ -7,6 +7,7 @@ import { getServerAuth } from '@/src/utils/supabase/getServerAuth';
 
 export default async function Publiclayout({ children }: { children: React.ReactNode }) {
 	const user = await getServerAuth();
+
 	if (!user) {
 		redirect(PAGES.LOGIN);
 	}

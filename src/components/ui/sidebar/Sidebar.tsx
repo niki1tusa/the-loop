@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { borderVariants, navVariants, textNavVariants } from './animate';
@@ -42,17 +43,18 @@ export default function Sidebar() {
 				{NAV_DATA.map(item => {
 					const Icon = item.icon;
 					return (
-						<motion.li
-							variants={textNavVariants}
-							className={clsx(
-								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
-								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
-							)}
-							key={item.id}
-						>
-							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
-							{item.title}
-						</motion.li>
+						<Link href={item.link} key={item.id}>
+							<motion.li
+								variants={textNavVariants}
+								className={clsx(
+									'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
+									item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
+								)}
+							>
+								<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+								{item.title}
+							</motion.li>
+						</Link>
 					);
 				})}
 				<motion.div

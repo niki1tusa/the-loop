@@ -1,6 +1,5 @@
 import { createClient } from '../../utils/supabase/client';
 
-// TODO: создается каждый день новая, а метка о выполннеии ставиться в today
 // create
 export async function createHabitHistory(idHabit: string) {
 	const supabase = createClient();
@@ -31,10 +30,38 @@ export async function completeHabitHistory(id: string) {
 // get
 export async function getHabitHistory(day: string) {
 	const supabase = createClient();
+	const {
+		data: { user },
+		error: errorUser,
+	} = await supabase.auth.getUser();
+	if (!user || errorUser) {
+		throw new Error('User not found!');
+	}
 	const { data: habitHistory, error } = await supabase
 		.from('habit_history')
-		.select('*')
-		.eq('completed_date', day);
+		.select('*,    habits (profile_id)')
+		.eq('completed_date', day)
+		.eq('habits.profile_id', user.id);
+	if (error) {
+		throw new Error(error.message);
+	}
+	return habitHistory;
+}
+// getALL
+export async function getALLHabitHistory() {
+	const supabase = createClient();
+	const {
+		data: { user },
+		error: errorUser,
+	} = await supabase.auth.getUser();
+	if (!user || errorUser) {
+		throw new Error('User not found!');
+	}
+	const { data: habitHistory, error } = await supabase
+		.from('habit_history')
+		.select('*,    habits (profile_id)')
+		.eq('habits.profile_id', user.id);
+
 	if (error) {
 		throw new Error(error.message);
 	}

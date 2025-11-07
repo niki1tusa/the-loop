@@ -2,16 +2,34 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import { api } from '../api';
 
-import { completeHabitHistory, createHabitHistory, getHabitHistory } from './habit-history-service';
+import {
+	completeHabitHistory,
+	createHabitHistory,
+	getALLHabitHistory,
+	getHabitHistory,
+} from './habit-history-service';
 import { THabitHistory } from '@/src/types/habit-histoty-types';
 
 export const habitsApi = api.injectEndpoints({
 	endpoints: builder => ({
-		// get
+		// get by day
 		getHabitsHistory: builder.query<THabitHistory[], string>({
 			async queryFn(day) {
 				try {
 					const data = await getHabitHistory(day);
+					return { data };
+				} catch (err) {
+					const message = err instanceof Error ? err.message : 'Unknown error';
+					return { error: { status: 'CUSTOM_ERROR', data: message } as FetchBaseQueryError };
+				}
+			},
+			providesTags: ['Habit_history'],
+		}),
+		// get all
+		getAllHabitsHistory: builder.query<THabitHistory[], void>({
+			async queryFn() {
+				try {
+					const data = await getALLHabitHistory();
 					return { data };
 				} catch (err) {
 					const message = err instanceof Error ? err.message : 'Unknown error';
@@ -52,6 +70,7 @@ export const habitsApi = api.injectEndpoints({
 
 export const {
 	useGetHabitsHistoryQuery,
+	useGetAllHabitsHistoryQuery,
 	useCreateHabitHistoryDayMutation,
 	useUpdateHabitHistoryMutation,
 } = habitsApi;
