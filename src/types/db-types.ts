@@ -8,12 +8,40 @@ export type Database = {
 	};
 	public: {
 		Tables: {
+			habit_history: {
+				Row: {
+					completed_date: string;
+					habit_id: string | null;
+					id: string;
+					is_completed: boolean;
+				};
+				Insert: {
+					completed_date?: string;
+					habit_id?: string | null;
+					id?: string;
+					is_completed?: boolean;
+				};
+				Update: {
+					completed_date?: string;
+					habit_id?: string | null;
+					id?: string;
+					is_completed?: boolean;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'habit_history_habit_id_fkey';
+						columns: ['habit_id'];
+						isOneToOne: false;
+						referencedRelation: 'habits';
+						referencedColumns: ['id'];
+					},
+				];
+			};
 			habits: {
 				Row: {
 					created_at: string | null;
 					icon_name: string | null;
 					id: string;
-					is_completed: boolean | null;
 					profile_id: string;
 					quantity: string | null;
 					quantity_description: string | null;
@@ -24,7 +52,6 @@ export type Database = {
 					created_at?: string | null;
 					icon_name?: string | null;
 					id?: string;
-					is_completed?: boolean | null;
 					profile_id: string;
 					quantity?: string | null;
 					quantity_description?: string | null;
@@ -35,7 +62,6 @@ export type Database = {
 					created_at?: string | null;
 					icon_name?: string | null;
 					id?: string;
-					is_completed?: boolean | null;
 					profile_id?: string;
 					quantity?: string | null;
 					quantity_description?: string | null;

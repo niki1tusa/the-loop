@@ -41,18 +41,3 @@ export async function createHabit(fields: Omit<THabitInsert, 'profile_id'>) {
 	}
 	return habit;
 }
-
-export async function updateQuantityCompletedHabit(idHabit: string) {
-	const supabase = createClient();
-
-	const { data: updateHabit, error: errorUpdateHabit } = await supabase
-		.from('habits')
-		.update({ is_completed: true })
-		.eq('id', idHabit)
-		.select('*')
-		.single<THabit>();
-	if (errorUpdateHabit) {
-		throw new Error(errorUpdateHabit.message);
-	}
-	return updateHabit;
-}

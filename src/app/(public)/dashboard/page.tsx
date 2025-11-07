@@ -4,9 +4,7 @@ import TodayCard from '@/src/components/ui/today/TodayCard';
 export default function DashboardPage() {
 	return (
 		<div className='flex gap-5'>
-			<div className='flex flex-col'>
-				<TodayCard />
-			</div>
+			<TodayCard />
 			<Calendar />
 		</div>
 	);
