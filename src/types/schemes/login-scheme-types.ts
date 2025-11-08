@@ -1,4 +1,5 @@
-import z from 'zod';
+import 'server-only'
+import { z } from 'zod';
 
 export const zodSchemeLoginForm = z.object({
 	email: z.email(),

@@ -3,8 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { LoginFormDataTypes } from '@/src/components/pages/login/login-types';
 import { PAGES } from '@/src/config/pages-config';
+import type { LoginFormDataTypes } from '@/src/types/schemes/login-scheme-types';
 import { createServer } from '@/src/utils/supabase/server';
 
 export async function login(formData: LoginFormDataTypes) {

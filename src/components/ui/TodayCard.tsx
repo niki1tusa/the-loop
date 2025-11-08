@@ -2,10 +2,9 @@
 
 import { useDispatch } from 'react-redux';
 
-import Button from '../button/Button';
-import ListHabit from '../list-habit/ListHabit';
-import Title from '../title/Title';
-
+import Button from './Button';
+import ListHabit from './ListHabit';
+import Title from './Title';
 import { open } from '@/src/store/modal-slice';
 
 export default function TodayCard() {

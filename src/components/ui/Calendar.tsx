@@ -1,12 +1,11 @@
 'use client';
 
-import { addDays, startOfWeek } from 'date-fns';
+import { addDays, isSameDay, parseISO, startOfWeek } from 'date-fns';
 import { Square, SquareCheck } from 'lucide-react';
 
-import Skeleton from '../skeleton/Skeleton';
-import Title from '../title/Title';
-
-import { WEEK_DAYS } from '@/src/constants/global-constants';
+import Skeleton from './Skeleton';
+import Title from './Title';
+import { WEEK_DAYS } from '@/src/constants/calendar-constants';
 import { useGetAllHabitsHistoryQuery } from '@/src/services/habit-history/habit-history-api';
 import { useGetHabitsQuery } from '@/src/services/habit/habit-api';
 
@@ -16,12 +15,14 @@ export default function Calendar() {
 
 	const isLoading = isLoadingHabit || isLoadingHistory;
 	const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
+	const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+	// TODO: объяснить по строчке
 	return (
 		<div className='flex flex-col gap-3'>
 			<Title textSize='lg'>Calendar</Title>
 
-			<div className='bg-card text-card-foreground flex flex-col gap-3 rounded-3xl shadow shadow-neutral-400'>
-				<div className='flex justify-around gap-2 rounded-3xl bg-neutral-300 px-3 py-2'>
+			<div className='bg-card text-card-foreground flex flex-col gap-3 rounded-3xl shadow'>
+				<div className='flex justify-around rounded-3xl bg-neutral-300 px-3 py-2'>
 					<span>Weeks</span>
 					<span>Monthly</span>
 					<span>Yearly</span>
@@ -32,30 +33,33 @@ export default function Calendar() {
 						<div />
 						<div className='flex gap-2'>
 							{WEEK_DAYS.map((item, i) => (
-								<span className='px-1.5' key={i}>
+								<span key={i} className='px-1.5'>
 									{item}
 								</span>
 							))}
 						</div>
 					</li>
+
 					{isLoading ? (
-						<Skeleton />
+						<li>
+							<Skeleton />
+						</li>
 					) : habits && habits.length > 0 ? (
 						habits.map(habit => {
-							const filterHistory = habitHistory
-								?.slice(-7)
-								.filter(item => item.habit_id === habit.id);
+							const historyForHabit = habitHistory?.filter(h => h.habit_id === habit.id) ?? [];
 
 							return (
 								<li className='grid grid-cols-[1fr_3fr] gap-2' key={habit.id}>
-									{habit.title}
+									<div>{habit.title}</div>
 									<div className='flex gap-2'>
-										{WEEK_DAYS.map((_, i) => {
-											const day = addDays(weekStart, i);
-											const isCompleted = filterHistory?.some(item => item.is_completed);
+										{days.map(day => {
+											const isCompleted = historyForHabit.some(h => {
+												if (!h.completed_date) return false;
+												return h.is_completed && isSameDay(parseISO(h.completed_date), day);
+											});
 
 											return (
-												<span key={i}>
+												<span key={day.getTime()}>
 													{isCompleted ? <SquareCheck className='text-secondary' /> : <Square />}
 												</span>
 											);
@@ -65,7 +69,7 @@ export default function Calendar() {
 							);
 						})
 					) : (
-						<li>List habit is empty.</li>
+						<li>Habits list is empty.</li>
 					)}
 				</ul>
 			</div>

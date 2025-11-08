@@ -1,4 +1,5 @@
-import z from 'zod';
+import 'server-only'
+import {z} from 'zod';
 
 export const zodSchemeCreateHabit = z.object({
 	title: z.string().min(1, 'Title is required!'),

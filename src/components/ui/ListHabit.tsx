@@ -5,8 +5,7 @@ import { Square, SquareCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
 
-import Skeleton from '../skeleton/Skeleton';
-
+import Skeleton from './Skeleton';
 import {
 	useCreateHabitHistoryDayMutation,
 	useGetHabitsHistoryQuery,
