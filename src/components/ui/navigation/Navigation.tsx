@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { borderVariants, navVariants, textNavVariants } from './animate';
-import { useGetProfileQuery } from '@/src/services/profile/profile-api';
 import { NAVIGATION } from '@/src/config/navigation-config';
+import { useGetProfileQuery } from '@/src/services/profile/profile-api';
 
 export default function Navigation() {
 	const { data: profile } = useGetProfileQuery();
@@ -31,7 +31,7 @@ export default function Navigation() {
 				onClick={() => setIsShow(!isShow)}
 				className='absolute top-8 right-2 z-20'
 			>
-				<PanelRightOpen />
+				<PanelRightOpen className='icon' />
 			</motion.button>
 			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
@@ -53,7 +53,7 @@ export default function Navigation() {
 									item.link === pathname && 'text-primary hover:text-primary/50'
 								)}
 							>
-								<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+								<Icon className='icon' />
 								{item.title}
 							</motion.li>
 						</Link>
@@ -79,7 +79,7 @@ export default function Navigation() {
 							)}
 							key={item.id}
 						>
-							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+							<Icon className='icon' />
 							{item.title}
 						</motion.li>
 					);
