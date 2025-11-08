@@ -3,7 +3,7 @@
 import { SquareX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 
-import Title from '../title/Title';
+import Title from '../Title';
 
 import { useClickOutside } from '@/src/hooks/useClickOutside';
 

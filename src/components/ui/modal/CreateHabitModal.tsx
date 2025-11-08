@@ -2,29 +2,21 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { toast } from 'sonner';
 
-import Button from '../button/Button';
-import Input from '../input/Input';
+import { TFormData, zodSchemeCreateHabit } from '../../../shared/types/schemes/habit-scheme-types';
+import Button from '../Button';
+import Input from '../Input';
 
 import Modal from './Modal';
-import { useCreateHabitMutation } from '@/src/services/habit/habit.api';
+import { useCreateHabitMutation } from '@/src/services/habit/habit-api';
 
 type Props = {
 	close: () => void;
 };
-const zodSchemeCreateHabit = z.object({
-	title: z.string().min(1, 'Title is required!'),
-	quantity: z
-		.string()
-		.trim()
-		.regex(/^\d+(?:[.,]\d+)?$/, 'Enter number!')
-		.min(1, 'Quantity is required!'),
-	quantity_description: z.string().min(1, 'Description is required!'),
-});
-type TFormData = z.infer<typeof zodSchemeCreateHabit>;
+
 export const CreateHabitModal = ({ close }: Props) => {
-	const [createHabit, { isError, isLoading, isSuccess }] = useCreateHabitMutation();
+	const [createHabit] = useCreateHabitMutation();
 	const {
 		register,
 		handleSubmit,
@@ -35,6 +27,7 @@ export const CreateHabitModal = ({ close }: Props) => {
 		try {
 			await createHabit(data).unwrap();
 			reset();
+			toast.success('The habit was successfully created!');
 			close();
 		} catch (error) {
 			console.error('er:', error);

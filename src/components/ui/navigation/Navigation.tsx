@@ -3,15 +3,18 @@
 import clsx from 'clsx';
 import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { borderVariants, navVariants, textNavVariants } from './animate';
-import { NAV_DATA } from './sidebar.data';
-import { useGetProfileQuery } from '@/src/services/profile/profile.api';
+import { useGetProfileQuery } from '@/src/services/profile/profile-api';
+import { NAVIGATION } from '@/src/config/navigation-config';
 
-export default function Sidebar() {
+export default function Navigation() {
 	const { data: profile } = useGetProfileQuery();
 	const [isShow, setIsShow] = useState<boolean>(true);
+	const pathname = usePathname();
 	return (
 		<motion.nav
 			variants={navVariants}
@@ -39,20 +42,21 @@ export default function Sidebar() {
 				/>
 			</motion.div>
 			<ul className='relative flex flex-col gap-4'>
-				{NAV_DATA.map(item => {
+				{NAVIGATION.map(item => {
 					const Icon = item.icon;
 					return (
-						<motion.li
-							variants={textNavVariants}
-							className={clsx(
-								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
-								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
-							)}
-							key={item.id}
-						>
-							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
-							{item.title}
-						</motion.li>
+						<Link href={item.link} key={item.id}>
+							<motion.li
+								variants={textNavVariants}
+								className={clsx(
+									'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
+									item.link === pathname && 'text-primary hover:text-primary/50'
+								)}
+							>
+								<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+								{item.title}
+							</motion.li>
+						</Link>
 					);
 				})}
 				<motion.div
@@ -70,12 +74,12 @@ export default function Sidebar() {
 						<motion.li
 							variants={textNavVariants}
 							className={clsx(
-								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-lg',
+								'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
 								item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
 							)}
 							key={item.id}
 						>
-							<Icon size={28} />
+							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
 							{item.title}
 						</motion.li>
 					);

@@ -5,9 +5,9 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Button from '../ui/button/Button';
+import Button from '../ui/Button';
 
-import { PAGES } from '@/src/config/pages.config';
+import { PAGES } from '@/src/config/pages-config';
 
 export default function HomePageClient() {
 	return (
@@ -37,7 +37,10 @@ export default function HomePageClient() {
 					</button>
 				</div>
 			</section>
-
+			{/* CTA */}
+			<section className='text-center'>
+				<h2 className='mb-4 text-3xl font-semibold'>Start your journey today — it’s free.</h2>
+			</section>
 			{/* FEATURES */}
 			<section className='grid max-w-5xl grid-cols-1 gap-6 px-4 py-16 sm:grid-cols-3'>
 				{[
@@ -59,12 +62,6 @@ export default function HomePageClient() {
 						<p className='text-muted'>{text}</p>
 					</motion.div>
 				))}
-			</section>
-
-			{/* CTA */}
-			<section className='py-16 text-center'>
-				<h2 className='mb-4 text-3xl font-semibold'>Start your journey today — it’s free.</h2>
-				<Button>Get started</Button>
 			</section>
 
 			{/* FOOTER */}

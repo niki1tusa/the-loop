@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Rubik } from 'next/font/google';
 
+import { SITE_NAME } from '../constants/seo-constants';
 import RootProvider from '../providers/Provider';
 
 import './globals.css';
@@ -16,7 +17,10 @@ const rubikSans = Rubik({
 });
 
 export const metadata: Metadata = {
-	title: 'The Loop',
+	title: {
+		absolute: SITE_NAME,
+		template: `${SITE_NAME} | %s`,
+	},
 	description: 'app for tracker habit',
 	icons: {
 		icon: '/favicon/favicon.svg',

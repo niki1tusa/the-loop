@@ -2,11 +2,12 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import { api } from '../api';
 
-import { createHabit, getProfileHabits } from './habit.service';
-import { THabit, THabitInsert } from '@/src/types/habit.types';
+import { createHabit, getProfileHabits } from './habit-service';
+import { THabit, THabitInsert } from '@/src/shared/types/habit-types';
 
 export const habitsApi = api.injectEndpoints({
 	endpoints: builder => ({
+		// get
 		getHabits: builder.query<THabit[], void>({
 			async queryFn() {
 				try {
@@ -17,8 +18,15 @@ export const habitsApi = api.injectEndpoints({
 					return { error: { status: 'CUSTOM_ERROR', data: message } as FetchBaseQueryError };
 				}
 			},
-			providesTags: ['Habits'],
+			providesTags: result =>
+				result
+					? [
+							...result.map(({ id }) => ({ type: 'Habits' as const, id })),
+							{ type: 'Habits', id: 'LIST' },
+						]
+					: [{ type: 'Habits', id: 'LIST' }],
 		}),
+		// create
 		createHabit: builder.mutation<THabit, Omit<THabitInsert, 'profile_id'>>({
 			async queryFn(fields) {
 				try {
@@ -29,7 +37,7 @@ export const habitsApi = api.injectEndpoints({
 					return { error: { status: 'CUSTOM_ERROR', data: message } as FetchBaseQueryError };
 				}
 			},
-			invalidatesTags: ['Habits'],
+			invalidatesTags: [{ type: 'Habits', id: 'LIST' }],
 		}),
 	}),
 	overrideExisting: false,
