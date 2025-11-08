@@ -3,7 +3,7 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../api';
 
 import { createHabit, getProfileHabits } from './habit-service';
-import { THabit, THabitInsert } from '@/src/types/habit-types';
+import { THabit, THabitInsert } from '@/src/shared/types/habit-types';
 
 export const habitsApi = api.injectEndpoints({
 	endpoints: builder => ({

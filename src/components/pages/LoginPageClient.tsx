@@ -5,7 +5,10 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { login } from '../../app/(auth)/login/actions';
-import { type LoginFormDataTypes, zodSchemeLoginForm } from '../../types/schemes/login-scheme-types';
+import {
+	type LoginFormDataTypes,
+	zodSchemeLoginForm,
+} from '../../shared/types/schemes/login-scheme-types';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Title from '../ui/Title';

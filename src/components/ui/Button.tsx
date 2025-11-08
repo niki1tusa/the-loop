@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 
-import { TButtonProps } from '../../types/button-types';
+import { TButtonProps } from '../../shared/types/button-types';
 
 export default function Button({ children, type = 'button', onClick, action }: TButtonProps) {
 	return (

@@ -1,4 +1,4 @@
-import { TProfile } from '../../types/profile-types';
+import { TProfile } from '../../shared/types/profile-types';
 import { createClient } from '../../utils/supabase/client';
 
 export async function getProfileById() {

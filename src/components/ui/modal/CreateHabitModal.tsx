@@ -4,11 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { TFormData, zodSchemeCreateHabit } from '../../../shared/types/schemes/habit-scheme-types';
 import Button from '../Button';
 import Input from '../Input';
 
 import Modal from './Modal';
-import { TFormData, zodSchemeCreateHabit } from '../../../types/schemes/habit-scheme-types';
 import { useCreateHabitMutation } from '@/src/services/habit/habit-api';
 
 type Props = {
