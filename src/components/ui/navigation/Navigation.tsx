@@ -38,7 +38,7 @@ export default function Navigation() {
 				<b>{profile?.name}</b>
 				<motion.div
 					variants={borderVariants}
-					className='bg-muted absolute my-5 h-[1.5px] w-full origin-left'
+					className='bg-muted my-5 h-[1.5px] w-full origin-left'
 				/>
 			</motion.div>
 			<ul className='relative flex flex-col gap-4'>
@@ -61,7 +61,7 @@ export default function Navigation() {
 				})}
 				<motion.div
 					variants={borderVariants}
-					className='bg-muted absolute my-5 h-[1.5px] w-full origin-left'
+					className='bg-muted my-5 h-[1.5px] w-full origin-left'
 				/>
 			</ul>
 			<ul className='flex flex-col gap-4'>
