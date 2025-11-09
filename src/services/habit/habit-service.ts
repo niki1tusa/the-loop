@@ -41,3 +41,9 @@ export async function createHabit(fields: Omit<THabitInsert, 'profile_id'>) {
 	}
 	return habit;
 }
+// delete
+export async function deleteHabit(id: string): Promise<void> {
+	const supabase = createClient();
+	const { error } = await supabase.from('habits').delete().eq('id', id);
+	if (error) throw new Error(error.message);
+}

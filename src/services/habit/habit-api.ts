@@ -2,7 +2,7 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import { api } from '../api';
 
-import { createHabit, getProfileHabits } from './habit-service';
+import { createHabit, deleteHabit, getProfileHabits } from './habit-service';
 import { THabit, THabitInsert } from '@/src/types/habit-types';
 
 export const habitsApi = api.injectEndpoints({
@@ -39,8 +39,21 @@ export const habitsApi = api.injectEndpoints({
 			},
 			invalidatesTags: [{ type: 'Habits', id: 'LIST' }],
 		}),
+		// delete
+		deleteHabit: builder.mutation<void, string>({
+			async queryFn(id) {
+				try {
+					await deleteHabit(id);
+					return { data: undefined };
+				} catch (err: unknown) {
+					const message = err instanceof Error ? err.message : 'Unknown error';
+					return { error: { status: 'CUSTOM_ERROR', data: message } as FetchBaseQueryError };
+				}
+			},
+			invalidatesTags: [{ type: 'Habits', id: 'LIST' }],
+		}),
 	}),
 	overrideExisting: false,
 });
 
-export const { useGetHabitsQuery, useCreateHabitMutation } = habitsApi;
+export const { useGetHabitsQuery, useCreateHabitMutation, useDeleteHabitMutation } = habitsApi;
