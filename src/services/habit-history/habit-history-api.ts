@@ -8,7 +8,7 @@ import {
 	getALLHabitHistory,
 	getHabitHistory,
 } from './habit-history-service';
-import { THabitHistory } from '@/src/types/habit-histoty-types';
+import { THabitHistory } from '@/src/shared/types/habit-histoty-types';
 
 export const habitsApi = api.injectEndpoints({
 	endpoints: builder => ({

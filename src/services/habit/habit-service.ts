@@ -1,4 +1,4 @@
-import { THabit, THabitInsert } from '../../types/habit-types';
+import { THabit, THabitInsert } from '../../shared/types/habit-types';
 import { createClient } from '../../utils/supabase/client';
 
 // get

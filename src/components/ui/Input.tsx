@@ -1,6 +1,6 @@
 import { FieldValues } from 'react-hook-form';
 
-import { TInputProps } from './input.types';
+import { TInputProps } from '../../shared/types/input-types';
 
 export default function Input<T extends FieldValues>({
 	placeholder = 'Enter text...',

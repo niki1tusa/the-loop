@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CreateHabitModal } from '../components/ui/modal/habit/CreateHabitModal';
+import { CreateHabitModal } from '../components/ui/modal/CreateHabitModal';
 import { close } from '../store/modal-slice';
 import { RootState } from '../store/store';
 

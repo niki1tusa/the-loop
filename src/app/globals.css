@@ -1,6 +1,7 @@
 @import 'tailwindcss';
+
 @custom-variant dark (&:where(.dark, .dark *));
-/* rounded-3xl; shadow shadow-neutral-400 */
+
 @theme {
 	--breakpoint-*: initial;
 }
@@ -50,7 +51,15 @@
 	--font-rubik: var(--font-rubik);
 	--font-inter: var(--font-inter);
 }
-
+@utility icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	flex-shrink: 0;
+	@variant 2xl {
+		width: 1.75rem;
+		height: 1.75rem;
+	}
+}
 body {
 	background: var(--background);
 	color: var(--foreground);
@@ -61,3 +70,4 @@ input,
 textarea {
 	cursor: pointer;
 }
+

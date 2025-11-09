@@ -4,12 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { login } from '../../../app/(auth)/login/actions';
-import Button from '../../ui/button/Button';
-import Input from '../../ui/input/Input';
-import Title from '../../ui/title/Title';
-
-import { LoginFormDataTypes, zodSchemeLoginForm } from './login-types';
+import { login } from '../../app/(auth)/login/actions';
+import {
+	type LoginFormDataTypes,
+	zodSchemeLoginForm,
+} from '../../shared/types/schemes/login-scheme-types';
+import Button from '../ui/Button';
+import Input from '../ui/Input';
+import Title from '../ui/Title';
 
 export default function LoginPageClient() {
 	const {

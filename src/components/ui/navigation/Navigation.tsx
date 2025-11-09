@@ -4,15 +4,17 @@ import clsx from 'clsx';
 import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { borderVariants, navVariants, textNavVariants } from './animate';
-import { NAV_DATA } from './sidebar-data';
+import { NAVIGATION } from '@/src/config/navigation-config';
 import { useGetProfileQuery } from '@/src/services/profile/profile-api';
 
-export default function Sidebar() {
+export default function Navigation() {
 	const { data: profile } = useGetProfileQuery();
 	const [isShow, setIsShow] = useState<boolean>(true);
+	const pathname = usePathname();
 	return (
 		<motion.nav
 			variants={navVariants}
@@ -29,18 +31,18 @@ export default function Sidebar() {
 				onClick={() => setIsShow(!isShow)}
 				className='absolute top-8 right-2 z-20'
 			>
-				<PanelRightOpen />
+				<PanelRightOpen className='icon' />
 			</motion.button>
 			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
 				<b>{profile?.name}</b>
 				<motion.div
 					variants={borderVariants}
-					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+					className='bg-muted absolute my-5 h-[1.5px] w-full origin-left'
 				/>
 			</motion.div>
 			<ul className='relative flex flex-col gap-4'>
-				{NAV_DATA.map(item => {
+				{NAVIGATION.map(item => {
 					const Icon = item.icon;
 					return (
 						<Link href={item.link} key={item.id}>
@@ -48,10 +50,10 @@ export default function Sidebar() {
 								variants={textNavVariants}
 								className={clsx(
 									'hover:text-foreground/50 flex items-center gap-1.5 px-2 py-1.5 text-sm 2xl:text-base',
-									item.title === 'Dashboard' && 'text-primary hover:text-primary/50'
+									item.link === pathname && 'text-primary hover:text-primary/50'
 								)}
 							>
-								<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+								<Icon className='icon' />
 								{item.title}
 							</motion.li>
 						</Link>
@@ -59,7 +61,7 @@ export default function Sidebar() {
 				})}
 				<motion.div
 					variants={borderVariants}
-					className='bg-muted absoulte my-5 h-[1.5px] w-full origin-left'
+					className='bg-muted absolute my-5 h-[1.5px] w-full origin-left'
 				/>
 			</ul>
 			<ul className='flex flex-col gap-4'>
@@ -77,7 +79,7 @@ export default function Sidebar() {
 							)}
 							key={item.id}
 						>
-							<Icon className='h-6 w-6 shrink-0 2xl:h-7 2xl:w-7' />
+							<Icon className='icon' />
 							{item.title}
 						</motion.li>
 					);
