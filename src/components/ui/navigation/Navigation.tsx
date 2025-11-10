@@ -5,15 +5,15 @@ import { Moon, PanelRightOpen, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
 import { borderVariants, navVariants, textNavVariants } from './animate';
 import { NAVIGATION } from '@/src/config/navigation-config';
 import { useGetProfileQuery } from '@/src/services/profile/profile-api';
+import { useNavigationStore } from '@/src/store/navigation-store';
 
 export default function Navigation() {
 	const { data: profile } = useGetProfileQuery();
-	const [isShow, setIsShow] = useState<boolean>(true);
+	const { isShow, toggle } = useNavigationStore();
 	const pathname = usePathname();
 	return (
 		<motion.nav
@@ -28,7 +28,7 @@ export default function Navigation() {
 				whileHover={{ scale: 1.02 }}
 				transition={{ type: 'spring', stiffness: 250, damping: 20 }}
 				type='button'
-				onClick={() => setIsShow(!isShow)}
+				onClick={toggle}
 				className='absolute top-8 right-2 z-20'
 			>
 				<PanelRightOpen className='icon' />
