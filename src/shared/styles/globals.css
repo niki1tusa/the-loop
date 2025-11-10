@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import './components.css';
+@import './custom.css';
+@import './tokens.css';
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family: Arial, Helvetica, sans-serif;
+}
+button,
+input,
+textarea {
+	cursor: pointer;
+}

@@ -4,7 +4,7 @@ import { Inter, Rubik } from 'next/font/google';
 import { SITE_NAME } from '../constants/seo-constants';
 import RootProvider from '../providers/Provider';
 
-import './globals.css';
+import '../shared/styles/globals.css';
 
 const interSans = Inter({
 	variable: '--font-inter',

@@ -2,47 +2,41 @@ import { createServerClient } from '@supabase/ssr';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function proxy(request: NextRequest) {
-	let supabaseResponse = NextResponse.next({
-		request,
-	});
+import { PAGES } from './config/pages-config';
 
+export async function proxy(request: NextRequest) {
+	const { pathname, searchParams } = request.nextUrl;
+
+	const response = NextResponse.next();
 	const supabase = createServerClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
 		process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
 		{
 			cookies: {
-				getAll() {
-					return request.cookies.getAll();
-				},
-				setAll(cookiesToSet) {
-					cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-					supabaseResponse = NextResponse.next({
-						request,
-					});
-					cookiesToSet.forEach(({ name, value, options }) =>
-						supabaseResponse.cookies.set(name, value, options)
-					);
-				},
+				getAll: () => request.cookies.getAll(),
+				setAll: all =>
+					all.forEach(({ name, value, options }) => response.cookies.set(name, value, options)),
 			},
 		}
 	);
+
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-
-	if (
-		!user &&
-		!request.nextUrl.pathname.startsWith('/login') &&
-		!request.nextUrl.pathname.startsWith('/auth')
-	) {
+	if (!user) {
 		const url = request.nextUrl.clone();
-		url.pathname = '/login';
+		url.pathname = PAGES.LOGIN;
+
+		const queryString = searchParams.size ? `?${searchParams}` : '';
+		url.search = '';
+		url.searchParams.set('redirectTo', pathname + queryString);
+		console.log(url);
 		return NextResponse.redirect(url);
 	}
+
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ['/auth/:path*', '/dashboard/:path*'],
+	matcher: ['/dashboard/:path*', '/my-habit/:path*'],
 };

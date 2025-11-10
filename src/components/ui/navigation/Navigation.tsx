@@ -41,7 +41,7 @@ export default function Navigation() {
 					className='bg-muted my-5 h-[1.5px] w-full origin-left'
 				/>
 			</motion.div>
-			<ul className='relative flex flex-col gap-4'>
+			<ul className='navigation-list'>
 				{NAVIGATION.map(item => {
 					const Icon = item.icon;
 					return (
@@ -64,7 +64,7 @@ export default function Navigation() {
 					className='bg-muted my-5 h-[1.5px] w-full origin-left'
 				/>
 			</ul>
-			<ul className='flex flex-col gap-4'>
+			<ul className='navigation-list'>
 				{[
 					{ id: 1, title: 'Light', icon: Sun },
 					{ id: 2, title: 'Dark', icon: Moon },

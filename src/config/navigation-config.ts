@@ -1,6 +1,6 @@
 import { CalendarFold, Dumbbell, LayoutDashboard, Settings, Trophy } from 'lucide-react';
 
-import { NavItem } from './navigation-types';
+import { NavItem } from '../shared/types/navigation-types';
 
 export const NAVIGATION: NavItem[] = [
 	{ id: 1, title: 'Dashboard', link: '/dashboard', icon: LayoutDashboard },

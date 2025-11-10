@@ -2,7 +2,7 @@ import { Variants } from 'motion';
 
 export const navVariants: Variants = {
 	open: {
-		width: '20%',
+		width: '15%',
 		transition: {
 			type: 'spring',
 			stiffness: 200,
@@ -12,7 +12,7 @@ export const navVariants: Variants = {
 		},
 	},
 	closed: {
-		width: '5%',
+		width: '3%',
 		transition: {
 			type: 'spring',
 			stiffness: 200,

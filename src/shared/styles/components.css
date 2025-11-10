@@ -1,0 +1,8 @@
+@layer components {
+	.navigation-list {
+		@apply flex flex-col gap-4;
+	}
+	.icon {
+		@apply h-6 w-6 shrink-0 2xl:h-7 2xl:w-7;
+	}
+}
