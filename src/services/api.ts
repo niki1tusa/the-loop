@@ -3,6 +3,6 @@ import { FetchBaseQueryError, createApi, fakeBaseQuery } from '@reduxjs/toolkit/
 export const api = createApi({
 	reducerPath: 'api',
 	baseQuery: fakeBaseQuery<FetchBaseQueryError>(),
-	tagTypes: ['Profile', 'Habits', 'Habit_history'],
+	tagTypes: ['Profile', 'Habits', 'Habit_history', 'Users_mock'],
 	endpoints: () => ({}),
 });

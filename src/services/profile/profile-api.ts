@@ -3,11 +3,11 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../api';
 
 import { getProfileById } from './profile-service';
-import { TProfile } from '@/src/shared/types/profile-types';
+import { Profile } from '@/src/shared/types/profile-types';
 
 export const habitsApi = api.injectEndpoints({
 	endpoints: builder => ({
-		getProfile: builder.query<TProfile, void>({
+		getProfile: builder.query<Profile, void>({
 			async queryFn() {
 				try {
 					const data = await getProfileById();

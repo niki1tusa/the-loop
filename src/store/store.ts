@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { api } from '../services/api';
 
-import modalSlice from '@/src/store/modal-slice';
+import modal from '@/src/store/modal-slice';
 
 export const store = configureStore({
 	reducer: {
 		[api.reducerPath]: api.reducer,
-		modalSlice,
+		modal,
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
 });

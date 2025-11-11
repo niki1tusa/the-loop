@@ -1,4 +1,4 @@
-import { TProfile } from '../../shared/types/profile-types';
+import { Profile } from '../../shared/types/profile-types';
 import { createClient } from '../../utils/supabase/client';
 
 export async function getProfileById() {
@@ -14,7 +14,7 @@ export async function getProfileById() {
 		.from('profiles')
 		.select('*')
 		.eq('id', user.id)
-		.single<TProfile>();
+		.single<Profile>();
 	if (!profile || profileErr) throw new Error('Profile not found!');
 	return profile;
 }

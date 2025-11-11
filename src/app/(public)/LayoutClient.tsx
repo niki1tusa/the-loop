@@ -15,7 +15,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 	return (
 		<div className='flex h-screen gap-5'>
 			<Navigation />
-			<div className='mt-5 flex flex-col gap-2 overflow-hidden'>
+			<div className='mt-5 flex flex-col gap-2'>
 				<Title textSize='xl'>{formatePathname}</Title>
 				{children}
 			</div>

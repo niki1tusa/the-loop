@@ -1,3 +1,5 @@
+'use server';
+
 import { createServer } from './server';
 
 export async function getServerAuth() {

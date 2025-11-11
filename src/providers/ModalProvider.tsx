@@ -6,7 +6,7 @@ import { RootState } from '../store/store';
 
 export default function ModalProvider() {
 	const dispatch = useDispatch();
-	const { type } = useSelector((s: RootState) => s.modalSlice);
+	const { type } = useSelector((s: RootState) => s.modal);
 
 	const handleClose = () => dispatch(close());
 
