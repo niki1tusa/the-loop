@@ -12,6 +12,7 @@ import {
 	useUpdateHabitHistoryMutation,
 } from '@/src/services/habit-history/habit-history-api';
 import { useGetHabitsQuery } from '@/src/services/habit/habit-api';
+import { ICONS } from '@/src/shared/types/icons-types';
 
 export default function ListHabit() {
 	const [updateCompleteHabit] = useUpdateHabitHistoryMutation();
@@ -40,7 +41,7 @@ export default function ListHabit() {
 		<ul className='flex flex-col gap-2.5'>
 			{!isLoading ? (
 				habits?.map(item => {
-					// const Icon = item.icon;
+					const Icon = ICONS[item.icon_name];
 					const todayHabitHistory = habitHistory?.find(habit => habit.habit_id === item.id);
 					return (
 						<motion.li
@@ -56,8 +57,8 @@ export default function ListHabit() {
 							key={item.id}
 						>
 							<div className='flex items-center gap-2'>
-								<div className='rounded bg-sky-50 p-2 shadow shadow-neutral-400'>
-									{/* <Icon size={28} className='text-primary' /> */}
+								<div className='rounded-md bg-sky-50 p-2 shadow shadow-neutral-400'>
+									<Icon size={28} className='text-primary' />
 								</div>
 								<div className='flex flex-col'>
 									<span>{item.title}</span>

@@ -4,7 +4,7 @@ import ListHabit from '../ui/ListHabit';
 
 export default function MyHabitPageClient() {
 	return (
-		<div>
+		<div className='pt-3'>
 			<div className='w-[300px]'>
 				<ListHabit />
 			</div>

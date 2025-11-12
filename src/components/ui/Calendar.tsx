@@ -1,34 +1,29 @@
 'use client';
 
-import { addDays, isSameDay, parseISO, startOfWeek } from 'date-fns';
+import { addDays, isSameDay, parseISO, subDays } from 'date-fns';
 import { Square, SquareCheck } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 
+import CalendarHeader from './CalendarHeader';
 import Skeleton from './Skeleton';
 import Title from './Title';
 import { WEEK_DAYS } from '@/src/constants/calendar-constants';
-import { useGetAllHabitsHistoryQuery } from '@/src/services/habit-history/habit-history-api';
-import { useGetHabitsQuery } from '@/src/services/habit/habit-api';
+import { useCalendar } from '@/src/hooks/useCalendar';
 
 export default function Calendar() {
-	const { data: habits, isLoading: isLoadingHabit } = useGetHabitsQuery();
-	const { data: habitHistory, isLoading: isLoadingHistory } = useGetAllHabitsHistoryQuery();
-
-	const isLoading = isLoadingHabit || isLoadingHistory;
-	const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
-	const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
-	// TODO: объяснить по строчке
+	const { habits, habitHistory, isLoading, dateCalendar, setDateCalendar } = useCalendar();
+	const handleCalendarScroll = (arg: 'left' | 'right') => {
+		setDateCalendar(prev =>
+			prev.map(date => (arg === 'left' ? subDays(date, 7) : addDays(date, 7)))
+		);
+	};
 	return (
 		<div className='flex flex-col gap-3'>
 			<Title textSize='lg'>Calendar</Title>
-
 			<div className='bg-card text-card-foreground flex flex-col gap-3 rounded-3xl shadow'>
-				<div className='flex justify-around rounded-3xl bg-neutral-300 px-3 py-2'>
-					<span>Weeks</span>
-					<span>Monthly</span>
-					<span>Yearly</span>
-				</div>
+				<CalendarHeader days={dateCalendar} handleScrollCalendar={handleCalendarScroll} />
 
-				<ul className='flex flex-col px-3 py-2'>
+				<ul className='flex flex-col px-3 pb-2'>
 					<li className='grid grid-cols-[1fr_3fr] gap-2'>
 						<div />
 						<div className='flex gap-2'>
@@ -50,21 +45,30 @@ export default function Calendar() {
 
 							return (
 								<li className='grid grid-cols-[1fr_3fr] gap-2' key={habit.id}>
-									<div>{habit.title}</div>
-									<div className='flex gap-2'>
-										{days.map(day => {
-											const isCompleted = historyForHabit.some(h => {
-												if (!h.completed_date) return false;
-												return h.is_completed && isSameDay(parseISO(h.completed_date), day);
-											});
+									<div className='text-sm'>{habit.title}</div>
+									<AnimatePresence mode='wait'>
+										<motion.div
+											key={dateCalendar[0].getTime()}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											transition={{ duration: 1 }}
+											exit={{ opacity: 0 }}
+											className='flex gap-2'
+										>
+											{dateCalendar.map(day => {
+												const isCompleted = historyForHabit.some(h => {
+													if (!h.completed_date) return false;
+													return h.is_completed && isSameDay(parseISO(h.completed_date), day);
+												});
 
-											return (
-												<span key={day.getTime()}>
-													{isCompleted ? <SquareCheck className='text-secondary' /> : <Square />}
-												</span>
-											);
-										})}
-									</div>
+												return (
+													<span key={day.getTime()}>
+														{isCompleted ? <SquareCheck className='text-secondary' /> : <Square />}
+													</span>
+												);
+											})}
+										</motion.div>
+									</AnimatePresence>
 								</li>
 							);
 						})

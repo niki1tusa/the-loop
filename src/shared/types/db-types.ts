@@ -1,3 +1,5 @@
+import { IconName } from './icons-types';
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
@@ -40,7 +42,7 @@ export type Database = {
 			habits: {
 				Row: {
 					created_at: string | null;
-					icon_name: string | null;
+					icon_name: IconName;
 					id: string;
 					profile_id: string;
 					quantity: string | null;
@@ -50,7 +52,7 @@ export type Database = {
 				};
 				Insert: {
 					created_at?: string | null;
-					icon_name?: string | null;
+					icon_name?: IconName | null;
 					id?: string;
 					profile_id: string;
 					quantity?: string | null;
@@ -60,7 +62,7 @@ export type Database = {
 				};
 				Update: {
 					created_at?: string | null;
-					icon_name?: string | null;
+					icon_name?: IconName | null;
 					id?: string;
 					profile_id?: string;
 					quantity?: string | null;

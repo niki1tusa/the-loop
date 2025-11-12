@@ -10,6 +10,7 @@ import Input from '../Input';
 
 import Modal from './Modal';
 import { useCreateHabitMutation } from '@/src/services/habit/habit-api';
+import { ICONS } from '@/src/shared/types/icons-types';
 
 type Props = {
 	close: () => void;
@@ -33,6 +34,7 @@ export const CreateHabitModal = ({ close }: Props) => {
 			console.error('er:', error);
 		}
 	});
+
 	return (
 		<Modal title='Create habit' close={close}>
 			<form onSubmit={onSubmit} className='flex w-full flex-col justify-center gap-3'>
@@ -63,6 +65,21 @@ export const CreateHabitModal = ({ close }: Props) => {
 					placeholder='liters, pages, minutes'
 					required
 				/>
+				<div className='flex gap-2'>
+					{Object.entries(ICONS).map(item => {
+						const Icon = item[1];
+						return (
+							<button
+								type='button'
+								key={item[0]}
+								className='focus:border-primary rounded p-2 shadow shadow-neutral-400 transition-all hover:bg-gray-100'
+							>
+								<Icon />
+							</button>
+						);
+					})}
+				</div>
+
 				<div className='flex gap-1.5'>
 					<Button type='submit'>Create</Button>
 					<Button onClick={close}>Close</Button>
