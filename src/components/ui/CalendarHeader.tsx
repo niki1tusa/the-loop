@@ -17,7 +17,7 @@ export default function CalendarHeader({
 	const [calendarOption, setcalendarOption] = useState<CalendarOption>('Weeks');
 	return (
 		<div>
-			<div className='flex gap-3 rounded-3xl bg-neutral-300 px-3 py-2'>
+			<div className='my-3 flex gap-3 rounded-3xl bg-neutral-300 px-3 py-2'>
 				{CALENDAR_OPTION.map(item => (
 					<Button
 						onClick={() => setcalendarOption(item)}
@@ -30,7 +30,7 @@ export default function CalendarHeader({
 				))}
 			</div>
 			<div className='flex gap-3 px-3 pt-1.5'>
-				<div className='rounded bg-gray-100 p-1 text-sm shadow shadow-neutral-400'>
+				<div className='rounded bg-gray-100 px-2 py-1 text-sm shadow shadow-neutral-400'>
 					{days[0].toISOString().split('T')[0].replace(/-/g, '.')} -{' '}
 					{days[6].toISOString().split('T')[0].replace(/-/g, '.')}
 				</div>
