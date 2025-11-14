@@ -1,10 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
-import { Square, SquareCheck } from 'lucide-react';
-import { motion } from 'motion/react';
 import { useEffect } from 'react';
 
+import HabitCard from './HabitCard';
 import Skeleton from './Skeleton';
 import {
 	useCreateHabitHistoryDayMutation,
@@ -20,7 +18,6 @@ export default function ListHabit() {
 	const { data: habits, isLoading } = useGetHabitsQuery();
 	const today = new Date().toISOString().split('T')[0];
 	const { data: habitHistory } = useGetHabitsHistoryQuery(today);
-
 	const handleComplete = async (id: string) => {
 		if (!id) return;
 		try {
@@ -44,43 +41,12 @@ export default function ListHabit() {
 					const Icon = ICONS[item.icon_name];
 					const todayHabitHistory = habitHistory?.find(habit => habit.habit_id === item.id);
 					return (
-						<motion.li
-							whileHover={{
-								y: -3,
-								scale: 1.02,
-								transition: { type: 'spring', stiffness: 200, damping: 15 },
-							}}
-							className={clsx(
-								'flex items-center justify-between rounded-3xl px-3 py-3 font-medium shadow hover:shadow-lg 2xl:text-xl',
-								todayHabitHistory?.is_completed ? 'text-secondary bg-green-200' : 'bg-card'
-							)}
+						<HabitCard
 							key={item.id}
-						>
-							<div className='flex items-center gap-2'>
-								<div className='rounded-md bg-sky-50 p-2 shadow shadow-neutral-400'>
-									<Icon size={28} className='text-primary' />
-								</div>
-								<div className='flex flex-col'>
-									<span>{item.title}</span>
-									<span className='text-muted text-sm'>
-										{todayHabitHistory?.is_completed ? item.quantity : 0}/{item.quantity}{' '}
-										{item.quantity_description}
-									</span>
-								</div>
-							</div>
-							<button
-								disabled={!!todayHabitHistory?.is_completed}
-								onClick={() => {
-									handleComplete(todayHabitHistory?.id ?? '');
-								}}
-							>
-								{todayHabitHistory?.is_completed ? (
-									<SquareCheck className='text-secondary' size={22} />
-								) : (
-									<Square size={22} />
-								)}
-							</button>
-						</motion.li>
+							habit={item}
+							handleComplete={handleComplete}
+							todayHabitHistory={todayHabitHistory}
+						/>
 					);
 				})
 			) : (

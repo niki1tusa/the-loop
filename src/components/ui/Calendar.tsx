@@ -51,7 +51,6 @@ export default function Calendar() {
 											key={dateCalendar[0].getTime()}
 											initial={{ opacity: 0 }}
 											animate={{ opacity: 1 }}
-											transition={{ duration: 1 }}
 											exit={{ opacity: 0 }}
 											className='flex gap-2'
 										>
