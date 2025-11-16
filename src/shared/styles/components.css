@@ -6,9 +6,13 @@
 		@apply h-6 w-6 shrink-0 2xl:h-7 2xl:w-7;
 	}
 	.btn-base {
-		@apply bg-card text-card-foreground shadow shadow-neutral-400;
+		@apply bg-card text-card-foreground rounded px-6 py-3 font-medium shadow shadow-neutral-400;
 	}
 	.btn-primary {
 		@apply bg-primary text-primary-foreground;
+	}
+
+	.btn-outline {
+		@apply border-primary text-primary border bg-transparent;
 	}
 }

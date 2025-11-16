@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { motion } from 'motion/react';
 
-import { TButtonProps } from '../../shared/types/button-types';
+import { TButtonProps, variantName } from '../../shared/types/button-types';
 
 export default function Button({
 	children,
@@ -11,19 +11,16 @@ export default function Button({
 	onClick,
 	action,
 	className,
-	variant = 'btn-primary',
+	variant = 'primary',
 }: TButtonProps) {
+	const variantClass = variantName[variant];
 	return (
 		<motion.button
 			whileHover={{ scale: 1.03 }}
 			whileTap={{ scale: 0.9 }}
 			transition={{ type: 'spring', stiffness: 200, damping: 10 }}
 			type={type}
-			className={clsx(
-				'rounded px-6 py-3 font-medium shadow shadow-neutral-400',
-				className,
-				variant
-			)}
+			className={clsx('btn-base', className, variantClass)}
 			onClick={onClick}
 			formAction={action}
 		>

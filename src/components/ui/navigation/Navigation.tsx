@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 import { borderVariants, navVariants, textNavVariants } from './animate';
 import { NAVIGATION } from '@/src/config/navigation-config';
 import { useGetProfileQuery } from '@/src/services/profile/profile-api';
-import { useNavigationStore } from '@/src/store/navigation-store';
+import { useNavigationStore } from '@/src/store/zustand/navigation-store';
 
 export default function Navigation() {
 	const { data: profile } = useGetProfileQuery();

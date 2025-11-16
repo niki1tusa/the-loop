@@ -1,12 +1,13 @@
 'use client';
 
 import { addDays, isSameDay, parseISO, subDays } from 'date-fns';
-import { Check, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 
+import Skeleton from '../Skeleton';
+import Title from '../Title';
+
 import CalendarHeader from './CalendarHeader';
-import Skeleton from './Skeleton';
-import Title from './Title';
 import { WEEK_DAYS } from '@/src/constants/calendar-constants';
 import { useCalendar } from '@/src/hooks/useCalendar';
 
@@ -26,8 +27,8 @@ export default function Calendar() {
 			<div className='bg-card/90 text-card-foreground rounded-3xl shadow shadow-neutral-400'>
 				<CalendarHeader days={dateCalendar} handleScrollCalendar={handleCalendarScroll} />
 
-				<div className='px-4 py-4'>
-					{/* Заголовок дней недели */}
+				<div className='p-4'>
+					{/* week days */}
 					<div className='text-muted-foreground border-muted mb-2 grid grid-cols-[minmax(0,1.3fr)_minmax(0,5fr)] gap-3 border-b px-3 pb-2 text-xs font-medium tracking-wide uppercase'>
 						<b className='self-end'>Habit</b>
 						<div className='flex justify-between gap-2'>
@@ -38,8 +39,7 @@ export default function Calendar() {
 							))}
 						</div>
 					</div>
-
-					{/* Список привычек */}
+					{/* habit list */}
 					<div className='space-y-1.5'>
 						{isLoading ? (
 							<div className='bg-muted/40 rounded-2xl px-3 py-4'>

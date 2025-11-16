@@ -3,7 +3,8 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
-import Button from './Button';
+import Button from '../Button';
+
 import { CALENDAR_OPTION } from '@/src/constants/calendar-constants';
 import { CalendarOption } from '@/src/shared/types/calendar-types';
 
@@ -22,7 +23,7 @@ export default function CalendarHeader({
 					<Button
 						onClick={() => setcalendarOption(item)}
 						className='rounded-3xl font-semibold'
-						variant={item === calendarOption ? 'btn-primary' : 'btn-base'}
+						variant={item === calendarOption ? 'primary' : 'outline'}
 						key={item}
 					>
 						{item}
@@ -35,21 +36,22 @@ export default function CalendarHeader({
 					{days[6].toISOString().split('T')[0].replace(/-/g, '.')}
 				</div>
 				<div className='flex gap-1'>
-					<button className='rounded p-1 shadow shadow-neutral-400'>
-						<ChevronLeft
-							size={20}
-							onClick={() => {
-								handleScrollCalendar('left');
-							}}
-						/>
+					<button
+						type='button'
+						onClick={() => {
+							handleScrollCalendar('left');
+						}}
+						className='rounded p-1 shadow shadow-neutral-400'
+					>
+						<ChevronLeft size={20} />
 					</button>
-					<button className='rounded p-1 shadow shadow-neutral-400'>
-						<ChevronRight
-							size={20}
-							onClick={() => {
-								handleScrollCalendar('right');
-							}}
-						/>
+					<button
+						onClick={() => {
+							handleScrollCalendar('right');
+						}}
+						className='rounded p-1 shadow shadow-neutral-400'
+					>
+						<ChevronRight size={20} />
 					</button>
 				</div>
 			</div>

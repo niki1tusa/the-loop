@@ -1,9 +1,9 @@
 'use client';
 
 import Achivment from '../ui/Achivment';
-import Calendar from '../ui/Calendar';
 import LiderBoard from '../ui/LiderBoard';
 import TodayCard from '../ui/TodayCard';
+import Calendar from '../ui/calendar/Calendar';
 
 export default function DashboardPageClient() {
 	return (
