@@ -2,13 +2,13 @@
 
 import Achivment from '../ui/Achivment';
 import LiderBoard from '../ui/LiderBoard';
-import TodayCard from '../ui/TodayCard';
+import Today from '../ui/Today';
 import Calendar from '../ui/calendar/Calendar';
 
 export default function DashboardPageClient() {
 	return (
 		<div className='flex gap-5'>
-			<TodayCard />
+			<Today />
 			<div className='flex flex-col gap-5'>
 				<Calendar />
 				<Achivment />

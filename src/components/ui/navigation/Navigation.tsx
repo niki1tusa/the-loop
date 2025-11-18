@@ -6,13 +6,15 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import Skeleton from '../Skeleton';
+
 import { borderVariants, navVariants, textNavVariants } from './animate';
 import { NAVIGATION } from '@/src/config/navigation-config';
 import { useGetProfileQuery } from '@/src/services/profile/profile-api';
 import { useNavigationStore } from '@/src/store/zustand/navigation-store';
 
 export default function Navigation() {
-	const { data: profile } = useGetProfileQuery();
+	const { data: profile, isLoading: isLoadingProfile } = useGetProfileQuery();
 	const { isShow, toggle } = useNavigationStore();
 	const pathname = usePathname();
 	return (
@@ -35,7 +37,7 @@ export default function Navigation() {
 			</motion.button>
 			<motion.div variants={textNavVariants} className='relative text-4xl'>
 				Hello, <br />
-				<b>{profile?.name}</b>
+				<b>{isLoadingProfile ? <Skeleton /> : profile?.name}</b>
 				<motion.div
 					variants={borderVariants}
 					className='bg-muted my-5 h-[1.5px] w-full origin-left'

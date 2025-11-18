@@ -42,9 +42,7 @@ export default function Calendar() {
 					{/* habit list */}
 					<div className='space-y-1.5'>
 						{isLoading ? (
-							<div className='bg-muted/40 rounded-2xl px-3 py-4'>
-								<Skeleton />
-							</div>
+							<Skeleton />
 						) : habits && habits.length > 0 ? (
 							habits.map(habit => {
 								const historyForHabit = habitHistory?.filter(h => h.habit_id === habit.id) ?? [];

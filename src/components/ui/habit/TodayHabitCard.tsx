@@ -5,19 +5,23 @@ import { motion } from 'motion/react';
 import { THabitHistory } from '@/src/shared/types/habit-histoty-types';
 import { THabit } from '@/src/shared/types/habit-types';
 import { ICONS } from '@/src/shared/types/icons-types';
+import { useActiveHabit } from '@/src/store/zustand/activeHabit';
 
-export default function HabitCard({
+export default function TodayHabitCard({
 	todayHabitHistory,
 	habit,
 	handleComplete,
 }: {
 	habit: THabit;
 	todayHabitHistory?: THabitHistory;
-	handleComplete: (id: string) => Promise<void>;
+	handleComplete?: (id: string) => Promise<void>;
 }) {
+	const setActiveHabit = useActiveHabit(state => state.setActive);
 	const Icon = ICONS[habit.icon_name];
 	return (
 		<motion.li
+			onHoverStart={() => setActiveHabit(habit)}
+			onHoverEnd={() => setActiveHabit(null)}
 			whileHover={{
 				y: -3,
 				scale: 1.02,
@@ -40,18 +44,20 @@ export default function HabitCard({
 					</span>
 				</div>
 			</div>
-			<button
-				disabled={!!todayHabitHistory?.is_completed}
-				onClick={() => {
-					handleComplete(todayHabitHistory?.id ?? '');
-				}}
-			>
-				{todayHabitHistory?.is_completed ? (
-					<SquareCheck className='text-secondary' size={22} />
-				) : (
-					<Square size={22} />
-				)}
-			</button>
+			{handleComplete && (
+				<button
+					disabled={!!todayHabitHistory?.is_completed}
+					onClick={() => {
+						handleComplete(todayHabitHistory?.id ?? '');
+					}}
+				>
+					{todayHabitHistory?.is_completed ? (
+						<SquareCheck className='text-secondary' size={22} />
+					) : (
+						<Square size={22} />
+					)}
+				</button>
+			)}
 		</motion.li>
 	);
 }

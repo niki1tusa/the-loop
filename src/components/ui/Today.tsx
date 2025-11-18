@@ -3,16 +3,20 @@
 import { useDispatch } from 'react-redux';
 
 import Button from './Button';
-import ListHabit from './ListHabit';
 import Title from './Title';
-import { open } from '@/src/store/modal-slice';
+import TodayListHabit from './habit/TodayListHabit';
+import { open } from '@/src/store/redux/modal-slice';
 
-export default function TodayCard() {
+export default function Today() {
 	const dispatch = useDispatch();
 	return (
-		<div className='flex w-[300px] flex-col gap-3'>
+		<div className='flex h-[500px] w-[300px] flex-col gap-3'>
 			<Title textSize='lg'>Today</Title>
-			<ListHabit />
+
+			<div className='min-h-0 flex-1'>
+				<TodayListHabit />
+			</div>
+
 			<Button onClick={() => dispatch(open({ type: 'createHabit' }))}>Add habit</Button>
 		</div>
 	);

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CreateHabitModal } from '../components/ui/modal/CreateHabitModal';
-import { close } from '../store/modal-slice';
-import { RootState } from '../store/store';
+import { close } from '../store/redux/modal-slice';
+import { RootState } from '../store/redux/store';
 
 export default function ModalProvider() {
 	const dispatch = useDispatch();

@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -65,7 +66,7 @@ export const CreateHabitModal = ({ close }: Props) => {
 					placeholder='liters, pages, minutes'
 					required
 				/>
-				<div className='flex gap-2'>
+				{/* <div className='flex gap-2'>
 					{Object.entries(ICONS).map(item => {
 						const Icon = item[1];
 						return (
@@ -78,7 +79,7 @@ export const CreateHabitModal = ({ close }: Props) => {
 							</button>
 						);
 					})}
-				</div>
+				</div> */}
 
 				<div className='flex gap-1.5'>
 					<Button type='submit'>Create</Button>

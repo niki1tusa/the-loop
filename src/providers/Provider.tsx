@@ -3,7 +3,7 @@
 import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
 
-import { store } from '../store/store';
+import { store } from '../store/redux/store';
 
 import ModalProvider from './ModalProvider';
 

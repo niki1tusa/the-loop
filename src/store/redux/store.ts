@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { api } from '../services/api';
+import { api } from '../../services/api';
 
-import modal from '@/src/store/modal-slice';
+import modal from '@/src/store/redux/modal-slice';
 
 export const store = configureStore({
 	reducer: {
